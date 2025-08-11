@@ -20,14 +20,14 @@ This project demonstrates hands-on experience with:
 ---
 
 ## 🌐 Live Links
-- **Live Client:** [https://studyhub.web.app](https://studyhub.web.app)
-- **Live Server API:** [https://studyhub-server.vercel.app](https://studyhub-server.vercel.app)
+- **Live Client:** [https://study-hub-khokan.web.app](https://study-hub-khokan.web.app)
+- **Live Server API:** [https://study-hub-khokan.vercel.app](https://study-hub-khokan.vercel.app)
 
 ---
 
 ## 📁 GitHub Repositories
-- **Client:**  [https://github.com/khokan/studyhub/tree/main/client](https://github.com/khokan/studyhub/tree/main/client)
-- **Server:** [https://github.com/khokan/studyhub/tree/main/server](https://github.com/khokan/studyhub/tree/main/server)
+- **Client:**  [https://github.com/khokan/study-hub/tree/main/client](https://github.com/khokan/study-hub/tree/main/client)
+- **Server:** [https://github.com/khokan/study-hub/tree/main/server](https://github.com/khokan/study-hub/tree/main/server)
 
 ---
 
@@ -82,7 +82,7 @@ This project demonstrates hands-on experience with:
 
 ### 1️⃣ Clone & Run Client
 ```bash
-git clone https://github.com/khokan/study-hub.gitt
+git clone https://github.com/khokan/study-hub.git
 cd client
 npm install
 npm run dev
