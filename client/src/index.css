@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
+
+  /* ✅ Primary brand color - deep, professional blue */
+  --color-primary: #0057b8; /* 🔵 A bold royal blue – used for buttons, links, highlights */
+
+  /* ✅ Neutral text colors - subtle and readable */
+  --color-secondary-black1: #1e1e2f; /* ⚫ Almost black with a bluish tint – best for main body text */
+  --color-secondary-black2: #3a3a4f; /* ⚫ Dark slate – ideal for subheadings, dimmed sections */
+
+  /* ✅ Grayscale - clean, balanced for UI elements */
+
+  --color-secondary-gray1: #6c7280;  /* 🌫️ Medium muted gray – helper text, timestamps, etc. */
+  --color-secondary-gray2: #e5e7eb;  /* ⚪ Light gray – form backgrounds, secondary sections */
+  --color-secondary-gray3: #f9fafb;  /* ⚪ Almost white – full section backgrounds or cards */
+  --color-secondary-gray4: #4b5563;  /* 🌑 Dark cool gray – icons, label captions */
+  --color-secondary-gray5: #9ca3af;  /* 🌫️ Soft gray – border color, muted text or disabled elements */
+  --color-secondary-gray6: #d1d5db;  /* ⚪ Light neutral gray – outlines, dividers, minimal borders */
+}
+
+
+@layer utilities {
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+}
+
+
+body {
+  font-family: var(--font-inter);
+}
+
+ul.menu-horizontal .active {
+  color: black;
+}
+
+.testimonial .slick-slide>div {
+  display: flex !important;
+  height: 100% !important;
+}
+
+.footer-links li a:hover {
+  color: var(--color-secondary-black1);
+}
