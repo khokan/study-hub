@@ -27,6 +27,7 @@ import CreateNote from "../components/pages/Student/CreateNote";
 import ManageNotes from "../components/pages/Student/ManageNotes";
 import ViewMaterials from "../components/pages/Student/ViewMaterials";
 import TutorsList from "../components/pages/Tutors/TutorsList";
+import FAQSection from "../components/pages/shared/Faq";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "forbidden",
         Component: Forbidden,
+      },
+      {
+        path: "/faq",
+        Component: FAQSection,
       },
     ],
   },

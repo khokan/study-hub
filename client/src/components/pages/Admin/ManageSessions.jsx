@@ -209,7 +209,7 @@ const ManageSessions = () => {
                 <td
                   className={
                     new Date(s.registrationEndDate) < new Date()
-                      ? "text-red-600 font-semibold"
+                      ? "text-red-600 font-semibold text-sm"
                       : ""
                   }
                 >

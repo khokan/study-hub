@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import useUserRole from "../../../hooks/useUserRole";
 import ReviewForm from "./ReviewForm";
+import { format } from "date-fns";
 
 const SessionDetails = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const SessionDetails = () => {
     queryKey: ["sessionReviews", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/reviews?sessionId=${id}`);
-      console.log('data', res)
+      console.log("data", res);
       return res.data;
     },
   });
@@ -156,133 +157,160 @@ const SessionDetails = () => {
   if (isLoading) {
     return <div className="text-center py-10">Loading...</div>;
   }
- const regEnd = new Date(session.registrationEndDate);
-        const isOngoing = currentDate < regEnd;
+  const regEnd = new Date(session.registrationEndDate);
+  const isOngoing = currentDate < regEnd;
 
   return (
-   <div className="max-w-5xl mx-auto px-6 py-10">
-  {/* Session Detail Card */}
-  <div className="bg-white rounded-3xl p-6 border border-secondary-gray6 shadow-sm hover:shadow-md transition-shadow duration-300">
-    {/* Session Image */}
-    <div className="relative w-full h-52 rounded-2xl overflow-hidden mb-6">
-      <img
-        src={
-          session.registrationFee === 0
-            ? "https://i.ibb.co/xtXLjnJ9/pic3.jpg"
-            : "https://i.ibb.co/m5T8FCYN/pic2.jpg"
-        }
-        alt={session.sessionTitle}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
-        <span
-          className={`text-xs px-3 py-1 rounded-full font-medium ${
-            isOngoing ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-          }`}
-        >
-          {isOngoing ? "Ongoing" : "Closed"}
-        </span>
-        <span className="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">
-          {session.registrationFee === 0 ? "Free" : `$${session.registrationFee}`}
-        </span>
-      </div>
-    </div>
+    <div className="max-w-5xl mx-auto px-6 py-10">
+      {/* Session Detail Card */}
+      <div
+        className="bg-secondary-black2 rounded-3xl p-6   shadow shadow-neutral-300 hover:shadow-neutral-400 
+                dark:shadow-neutral-800 dark:hover:shadow-neutral-700 transition"
+        style={{
+          transition: "box-shadow 0.3s ease",
+        }}
+      >
+        {/* Session Image */}
+        <div className="relative w-full h-52 rounded-2xl overflow-hidden mb-6">
+          <img
+            src={
+              session.registrationFee === 0
+                ? "https://i.ibb.co/xtXLjnJ9/pic3.jpg"
+                : "https://i.ibb.co/m5T8FCYN/pic2.jpg"
+            }
+            alt={session.sessionTitle}
+            className="w-full h-full object-cover"
+          />
 
-    {/* Content */}
-    <h1 className="text-3xl font-bold text-secondary-black1 mb-2">{session.sessionTitle}</h1>
-    <p className="text-sm text-secondary-gray4 leading-relaxed mb-4">
-      {session.sessionDescription}
-    </p>
+          {/* Top Left Badge */}
+          <div className="absolute top-3 left-3">
+            <span
+              className={`text-xs px-3 py-1 rounded-full font-medium ${
+                isOngoing
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {isOngoing ? "Ongoing" : "Closed"}
+            </span>
+          </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-secondary-gray4 mb-6">
-      <div>
-        <strong className="text-secondary-black1">Tutor:</strong> {session.tutor.tutorName}
+          {/* Top Right Badge */}
+          <div className="absolute top-3 right-3">
+            <span className="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">
+              {session.registrationFee === 0
+                ? "Free"
+                : `$${session.registrationFee}`}
+            </span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <h1 className="text-3xl font-bold text-secondary-black1 mb-2">
+          {session.sessionTitle}
+        </h1>
+        <p className="text-sm text-secondary-gray4 leading-relaxed mb-4">
+          {session.sessionDescription}
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-secondary-gray4 mb-6">
+          <div>
+            <strong className="text-secondary-black1">Tutor:</strong>{" "}
+            {session.tutor.tutorName}
+          </div>
+          <div>
+            <strong className="text-secondary-black1">Fee:</strong>{" "}
+            {session.registrationFee === 0 ? (
+              <span className="text-green-600 font-semibold">Free</span>
+            ) : (
+              `$${session.registrationFee}`
+            )}
+          </div>
+          <div>
+            <strong className="text-secondary-black1">Registration:</strong>{" "}
+            {format(new Date(session.registrationStartDate), "dd-MMM-yyyy")} →{" "}
+            {format(new Date(session.registrationEndDate), "dd-MMM-yyyy")}
+          </div>
+          <div>
+            <strong className="text-secondary-black1">Class Dates:</strong>{" "}
+            {format(new Date(session.classStartDate), "dd-MMM-yyyy")} →
+            {format(new Date(session.classEndDate), "dd-MMM-yyyy")}
+          </div>
+          <div>
+            <strong className="text-secondary-black1">Duration:</strong>{" "}
+            {session.sessionDuration}
+          </div>
+        </div>
+
+        {/* Booking Button */}
+        <div className="mt-4">
+          <button
+            onClick={handleBooking}
+            className={`w-full md:w-auto px-6 py-3 rounded-full font-semibold transition-all duration-200 ${
+              isRegistrationClosed || alreadyBooked || isBookDisabled
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-primary text-white hover:bg-primary/90"
+            }`}
+            disabled={isBookDisabled || alreadyBooked}
+          >
+            {alreadyBooked
+              ? "Already Booked"
+              : isRegistrationClosed
+              ? "Registration Closed"
+              : "Book Now"}
+          </button>
+        </div>
       </div>
-      <div>
-        <strong className="text-secondary-black1">Fee:</strong>{" "}
-        {session.registrationFee === 0 ? (
-          <span className="text-green-600 font-semibold">Free</span>
+
+      {/* Reviews Section */}
+      <div
+        className="mt-12 bg-secondary-black2 p-6 rounded-3xl  shadow shadow-neutral-300 hover:shadow-neutral-400 
+                dark:shadow-neutral-800 dark:hover:shadow-neutral-700 transition"
+        style={{
+          transition: "box-shadow 0.3s ease",
+        }}
+      >
+        <h3 className="text-2xl font-bold text-secondary-black1 mb-6">
+          Student Reviews
+        </h3>
+
+        {reviews.length === 0 ? (
+          <p className="text-secondary-gray4 italic">No reviews yet.</p>
         ) : (
-          `$${session.registrationFee}`
+          <ul className="space-y-4">
+            {reviews.map((rev) => (
+              <li
+                key={rev._id}
+                className="bg-secondary-gray3 p-4 rounded-md shadow-sm border border-secondary-gray6"
+              >
+                <p className="text-sm text-secondary-black2">{rev.comment}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {totalReviews > 0 && (
+          <div className="mt-6 text-center">
+            <p className="text-xl font-semibold text-secondary-black1">
+              Average Rating:{" "}
+              <span className="text-yellow-500">{averageRating} / 5</span>
+            </p>
+            <p className="text-sm text-secondary-gray4">
+              {totalReviews} review{totalReviews > 1 && "s"} submitted
+            </p>
+          </div>
+        )}
+
+        {role === "student" && !isRegistrationClosed && !hasReviewed && (
+          <div className="mt-8">
+            <h4 className="text-lg font-semibold text-secondary-black1 mb-2">
+              Leave a Review
+            </h4>
+            <ReviewForm sessionId={session._id} onSuccess={refetchReviews} />
+          </div>
         )}
       </div>
-      <div>
-        <strong className="text-secondary-black1">Registration:</strong>{" "}
-        {session.registrationStartDate} → {session.registrationEndDate}
-      </div>
-      <div>
-        <strong className="text-secondary-black1">Class Dates:</strong>{" "}
-        {session.classStartDate} → {session.classEndDate}
-      </div>
-      <div>
-        <strong className="text-secondary-black1">Duration:</strong>{" "}
-        {session.sessionDuration}
-      </div>
     </div>
-
-    {/* Booking Button */}
-    <div className="mt-4">
-      <button
-        onClick={handleBooking}
-        className={`w-full md:w-auto px-6 py-3 rounded-full font-semibold transition-all duration-200 ${
-          isRegistrationClosed || alreadyBooked || isBookDisabled
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-primary text-white hover:bg-primary/90"
-        }`}
-        disabled={isBookDisabled || alreadyBooked}
-      >
-        {alreadyBooked
-          ? "Already Booked"
-          : isRegistrationClosed
-          ? "Registration Closed"
-          : "Book Now"}
-      </button>
-    </div>
-  </div>
-
-  {/* Reviews Section */}
-  <div className="mt-12 bg-white p-6 rounded-3xl border border-secondary-gray6 shadow-sm hover:shadow-md transition-shadow duration-300">
-    <h3 className="text-2xl font-bold text-secondary-black1 mb-6">Student Reviews</h3>
-
-    {reviews.length === 0 ? (
-      <p className="text-secondary-gray4 italic">No reviews yet.</p>
-    ) : (
-      <ul className="space-y-4">
-        {reviews.map((rev) => (
-          <li
-            key={rev._id}
-            className="bg-secondary-gray3 p-4 rounded-md shadow-sm border border-secondary-gray6"
-          >
-            <p className="text-sm text-secondary-black2">{rev.comment}</p>
-          </li>
-        ))}
-      </ul>
-    )}
-
-    {totalReviews > 0 && (
-      <div className="mt-6 text-center">
-        <p className="text-xl font-semibold text-secondary-black1">
-          Average Rating:{" "}
-          <span className="text-yellow-500">{averageRating} / 5</span>
-        </p>
-        <p className="text-sm text-secondary-gray4">
-          {totalReviews} review{totalReviews > 1 && "s"} submitted
-        </p>
-      </div>
-    )}
-
-    {role === "student" && !isRegistrationClosed && !hasReviewed && (
-      <div className="mt-8">
-        <h4 className="text-lg font-semibold text-secondary-black1 mb-2">
-          Leave a Review
-        </h4>
-        <ReviewForm sessionId={session._id} onSuccess={refetchReviews} />
-      </div>
-    )}
-  </div>
-</div>
-
-
   );
 };
 

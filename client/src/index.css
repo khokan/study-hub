@@ -1,13 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: dark --default;
-}
+@plugin "daisyui";
 
 @plugin "daisyui/theme" {
   name: "light";
-  default: true;
   --font-inter: "Inter", sans-serif;
   --font-manrope: "Manrope", sans-serif;
 
@@ -20,24 +17,24 @@
 
   /* ✅ Grayscale - clean, balanced for UI elements */
 
-  --color-secondary-gray1: #6c7280;  /* 🌫️ Medium muted gray – helper text, timestamps, etc. */
-  --color-secondary-gray2: #e5e7eb;  /* ⚪ Light gray – form backgrounds, secondary sections */
-  --color-secondary-gray3: #f9fafb;  /* ⚪ Almost white – full section backgrounds or cards */
-  --color-secondary-gray4: #4b5563;  /* 🌑 Dark cool gray – icons, label captions */
-  --color-secondary-gray5: #9ca3af;  /* 🌫️ Soft gray – border color, muted text or disabled elements */
-  --color-secondary-gray6: #d1d5db;  /* ⚪ Light neutral gray – outlines, dividers, minimal borders */
+  --color-secondary-gray1: #6c7280; /* 🌫️ Medium muted gray – helper text, timestamps, etc. */
+  --color-secondary-gray2: #e5e7eb; /* ⚪ Light gray – form backgrounds, secondary sections */
+  --color-secondary-gray3: #f9fafb; /* ⚪ Almost white – full section backgrounds or cards */
+  --color-secondary-gray4: #4b5563; /* 🌑 Dark cool gray – icons, label captions */
+  --color-secondary-gray5: #9ca3af; /* 🌫️ Soft gray – border color, muted text or disabled elements */
+  --color-secondary-gray6: #d1d5db; /* ⚪ Light neutral gray – outlines, dividers, minimal borders */
 }
 
 /* 🌙 Dark theme overrides */
 [data-theme="dark"] {
-  --color-secondary-black1: #f5f5f5;   /* white-ish for text */
-  --color-secondary-black2: #d1d5db;   /* lighter subheading */
-  --color-secondary-gray1: #9ca3af;    /* muted gray */
-  --color-secondary-gray2: #374151;    /* dark background */
-  --color-secondary-gray3: #1f2937;    /* deeper background */
-  --color-secondary-gray4: #9ca3af;    /* icon/labels */
-  --color-secondary-gray5: #6b7280;    /* muted/disabled */
-  --color-secondary-gray6: #4b5563;    /* border/divider */
+  --color-secondary-black1: #f5f5f5; /* white-ish for text */
+  --color-secondary-black2: #d1d5db; /* lighter subheading */
+  --color-secondary-gray1: #9ca3af; /* muted gray */
+  --color-secondary-gray2: #374151; /* dark background */
+  --color-secondary-gray3: #1f2937; /* deeper background */
+  --color-secondary-gray4: #9ca3af; /* icon/labels */
+  --color-secondary-gray5: #6b7280; /* muted/disabled */
+  --color-secondary-gray6: #4b5563; /* border/divider */
 }
 
 @layer utilities {
@@ -46,19 +43,17 @@
       max-width: 1280px;
     }
   }
-
 }
 
-
 body {
-  font-family: var(--font-inter);
+  font-family: "Inter", sans-serif;
 }
 
 ul.menu-horizontal .active {
   color: black;
 }
 
-.testimonial .slick-slide>div {
+.testimonial .slick-slide > div {
   display: flex !important;
   height: 100% !important;
 }

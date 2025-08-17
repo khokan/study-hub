@@ -7,25 +7,27 @@ const Footer = () => {
   return (
     <div className="bg-base-200 py-12 px-4">
       {/* Newsletter Section */}
-    <div className="container mx-auto rounded-3xl 
+      <div
+        className="container mx-auto rounded-3xl 
   bg-gradient-to-br from-primary to-primary/80 
   dark:from-secondary-black2 dark:to-secondary-black1
-  text-center p-8 lg:py-16 shadow-lg">
-        <h3 className="font-bold text-2xl lg:text-4xl text-white mb-3">
+  text-center p-8 lg:py-16 shadow-lg"
+      >
+        <h3 className="font-bold text-2xl lg:text-4xl text-secondary-white mb-3">
           Subscribe to Our Newsletter
         </h3>
-        <p className="text-white mb-8">
+        <p className="text-secondary-white mb-8">
           Get updates on study sessions, materials, and learning tips.
         </p>
         <form className="flex gap-4 sm:gap-0 flex-col sm:flex-row items-center justify-center max-w-xl mx-auto">
           <input
             type="email"
             placeholder="Your email address"
-            className="w-full bg-white text-gray-700 placeholder-gray-400 rounded-full py-3 pl-5 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0057b8]"
+            className="w-full bg-secondary-white text-secondary-gray5 placeholder-secondary-gray6 rounded-full py-3 pl-5 border border-secondary-gray6 focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button
             type="submit"
-            className="w-full sm:w-auto bg-[#0057b8] text-white font-medium px-6 py-3 rounded-full hover:bg-[#004aa0] transition"
+            className="w-full sm:w-auto font-bold btn btn-primary whitespace-nowrap  px-6 py-3 rounded-full "
           >
             Sign Up
           </button>
@@ -76,7 +78,9 @@ const Footer = () => {
         {/* Right Column */}
         <div className="md:w-1/2 flex flex-col sm:flex-row gap-10 md:gap-0">
           <div className="flex-1">
-            <h3 className="text-secondary-gray6 font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-secondary-gray6 font-semibold mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-3 text-secondary-gray5">
               <li>
                 <Link to="/" className="hover:text-primary">
@@ -101,11 +105,13 @@ const Footer = () => {
             </ul>
           </div>
           <div className="flex-1">
-            <h3 className="text-secondary-gray6 font-semibold mb-4">Support & Info</h3>
+            <h3 className="text-secondary-gray6 font-semibold mb-4">
+              Support & Info
+            </h3>
             <ul className="space-y-3 text-secondary-gray5">
               <li>
-                <Link to="/help-center" className="hover:text-primary">
-                  Help Center
+                <Link to="/About" className="hover:text-primary">
+                  About
                 </Link>
               </li>
               <li>
@@ -119,8 +125,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/terms-conditions" className="hover:text-primary">
-                  Terms & Conditions
+                <Link to="/teams" className="hover:text-primary">
+                  Teams
                 </Link>
               </li>
             </ul>

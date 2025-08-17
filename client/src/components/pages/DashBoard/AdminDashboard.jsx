@@ -22,37 +22,41 @@ import useAuth from "../../../hooks/useAuth";
 
 // ✅ Profile Card Component
 const ProfileCard = ({ admin }) => {
-   const { user } = useAuth();
+  const { user } = useAuth();
   return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            {/* Profile Card */}
-            <div className="bg-base-100 border rounded-md shadow p-6 flex flex-col sm:flex-row sm:items-center gap-6">
-              <img
-                src={admin?.image || user?.photoURL || "/default-avatar.png"}
-                alt="Profile"
-                className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border shadow"
-              />
-              <div className="text-center sm:text-left">
-                <h2 className="text-xl sm:text-2xl font-semibold text-secondary-black1">
-                  {admin?.name || admin?.displayName || "N/A"}
-                </h2>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  <FaEnvelope className="inline mr-1" />
-                  {admin?.email || "Not provided"}
-                </p>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  <FaUsers className="inline mr-1" />
-                  {admin?.role || "Student"}
-                </p>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  📞 {admin?.phone || "Not provided"}
-                </p>
-                
-              </div>
-            </div>
-    
-            {/* Summary Card */}
-            {/* <div className="bg-base-100 border rounded-md shadow p-6 flex flex-col items-center justify-center text-center">
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      className=" bg-base-100 shadow-md border border-gray-200 hover:shadow-lg"
+    >
+      <div>
+        {/* Profile Card */}
+        <div className="bg-base-100 rounded-md shadow p-6 flex justify-center flex-col sm:flex-row sm:items-center gap-6">
+          <img
+            src={admin?.image || user?.photoURL || "/default-avatar.png"}
+            alt="Profile"
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover  shadow"
+          />
+          <div className="text-center sm:text-left">
+            <h2 className="text-xl sm:text-2xl font-semibold text-secondary-black1">
+              {admin?.name || admin?.displayName || "N/A"}
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base">
+              <FaEnvelope className="inline mr-1" />
+              {admin?.email || "Not provided"}
+            </p>
+            <p className="text-gray-600 text-sm sm:text-base">
+              <FaUsers className="inline mr-1" />
+              {admin?.role || "Student"}
+            </p>
+            <p className="text-gray-600 text-sm sm:text-base">
+              📞 {admin?.phone || "Not provided"}
+            </p>
+          </div>
+        </div>
+
+        {/* Summary Card */}
+        {/* <div className="bg-base-100 border rounded-md shadow p-6 flex flex-col items-center justify-center text-center">
               <h2 className="text-lg sm:text-xl font-semibold text-secondary-black1 mb-2">
                 Total Enrolled Sessions
               </h2>
@@ -60,8 +64,8 @@ const ProfileCard = ({ admin }) => {
                 {data.totalEnrollments}
               </p>
             </div> */}
-          </div>
-    
+      </div>
+    </motion.div>
   );
 };
 
@@ -76,14 +80,13 @@ const AdminDashboard = () => {
     },
   });
 
-  const { data: adminProfile, isLoading: loadingProfile } = useQuery({
-  queryKey: ["adminProfile"],
-  queryFn: async () => {
-    const res = await axiosSecure.get("/profile");
-    return res.data;
-  },
-});
-
+  const { data: adminProfile } = useQuery({
+    queryKey: ["adminProfile"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/profile");
+      return res.data;
+    },
+  });
 
   if (isLoading) {
     return (
@@ -132,14 +135,13 @@ const AdminDashboard = () => {
         Admin Dashboard Overview
       </h1>
 
-      <div className="mb-10 max-w-4xl mx-auto">
-      <ProfileCard admin={adminProfile} className="mb-10"/>
-     </div> 
+      <div className="mb-10 max-w-xl">
+        <ProfileCard admin={adminProfile} className="mb-10" />
+      </div>
       {/* 🔹 Profile + Stat Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-12">
-
+      <div className="grid grid-cols-1 lg:grid-cols-5   gap-6 mb-12">
         {/* Stat cards (4 cols on lg, full width on small) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:col-span-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-6 lg:col-span-4">
           <StatCard
             icon={<FaUserGraduate className="text-blue-500 text-3xl" />}
             label="Total Students"
@@ -198,8 +200,15 @@ const AdminDashboard = () => {
         <div className="h-[400px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={enrollmentsPerSession}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-              <XAxis dataKey="sessionTitle" interval={0} tick={<CustomXAxisTick />} />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                className="stroke-gray-200"
+              />
+              <XAxis
+                dataKey="sessionTitle"
+                interval={0}
+                tick={<CustomXAxisTick />}
+              />
               <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
               <Tooltip
                 cursor={{ fill: "rgba(0, 87, 184, 0.1)" }}
@@ -210,7 +219,11 @@ const AdminDashboard = () => {
                   border: "1px solid #e5e7eb",
                 }}
               />
-              <Bar dataKey="enrollmentCount" fill="#0057b8" radius={[6, 6, 0, 0]} />
+              <Bar
+                dataKey="enrollmentCount"
+                fill="#0057b8"
+                radius={[6, 6, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -218,7 +231,6 @@ const AdminDashboard = () => {
     </div>
   );
 };
-
 
 /* 🔹 Stat Card Component */
 const StatCard = ({ icon, label, count }) => (
