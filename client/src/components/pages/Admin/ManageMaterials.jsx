@@ -25,69 +25,78 @@ const ManageMaterials = () => {
       confirmButtonText: "Yes, delete it!",
     });
 
-    if (confirm.isConfirmed) {
-      try {
-        const res = await axiosSecure.delete(`/materials/${id}`);
-        if (res.data?.message === "Deleted") {
-          Swal.fire("Deleted!", "Material has been removed.", "success");
-          refetch();
-        }
-      } catch (err) {
-        Swal.fire("Error", err.message, "error");
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const res = await axiosSecure.delete(`/materials/${id}`);
+      if (res.data?.message === "Deleted") {
+        Swal.fire("Deleted!", "Material has been removed.", "success");
+        refetch();
       }
+    } catch (err) {
+      Swal.fire("Error", err.message, "error");
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold text-primary mb-6">
+    <div className="p-4 max-w-7xl mx-auto">
+      <h2 className="text-xl font-semibold text-primary mb-4">
         Manage Study Materials
       </h2>
 
       {materials.length === 0 ? (
-        <p className="text-center text-secondary-gray1">
+        <p className="text-center text-gray-500 text-sm">
           No materials available.
         </p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="table table-zebra w-full text-sm">
-            <thead className="bg-secondary-gray2 text-secondary-black2">
+        <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+          <table className="table w-full text-sm">
+            <thead className="bg-gray-100 text-gray-700 text-xs uppercase sticky top-0 z-10">
               <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Tutor Email</th>
-                <th>Drive Link</th>
-                <th>Image</th>
-                <th>Action</th>
+                <th className="px-3 py-2">#</th>
+                <th className="px-3 py-2">Title</th>
+                <th className="px-3 py-2">Tutor</th>
+                <th className="px-3 py-2">Drive</th>
+                <th className="px-3 py-2">Image</th>
+                <th className="px-3 py-2 text-right">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y">
               {materials.map((mat, index) => (
-                <tr key={mat._id} className="hover:bg-secondary-gray3/40">
-                  <td>{index + 1}</td>
-                  <td className="font-medium">{mat.title}</td>
-                  <td>{mat.tutorEmail}</td>
-                  <td>
+                <tr
+                  key={mat._id}
+                  className="hover:bg-gray-50 transition-colors duration-150"
+                >
+                  <td className="px-3 py-2 text-xs text-gray-500">
+                    {index + 1}
+                  </td>
+                  <td className="px-3 py-2 font-medium text-gray-800">
+                    {mat.title}
+                  </td>
+                  <td className="px-3 py-2 text-xs text-gray-600">
+                    {mat.tutorEmail}
+                  </td>
+                  <td className="px-3 py-2">
                     <a
                       href={mat.driveLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-primary underline"
+                      className="px-2 py-1 text-xs rounded bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
                     >
-                      Drive
+                      Open
                     </a>
                   </td>
-                  <td>
+                  <td className="px-3 py-2">
                     <img
                       src={mat.image}
                       alt="Material"
-                      className="w-16 h-10 object-cover rounded shadow"
+                      className="w-14 h-10 object-cover rounded border shadow-sm"
                     />
                   </td>
-                  <td>
+                  <td className="px-3 py-2 text-right">
                     <button
                       onClick={() => handleDelete(mat._id)}
-                      className="btn btn-xs btn-error cursor-pointer"
+                      className="px-2 py-1 text-xs rounded bg-red-500 text-white hover:bg-red-600 transition"
                     >
                       Delete
                     </button>

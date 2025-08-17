@@ -6,15 +6,20 @@ import useAuth from "../../../hooks/useAuth";
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const fetchUsers = async (query = "") => {
     try {
+      setLoading(true);
       const res = await axiosSecure.get(`/users?search=${query}`);
       setUsers(res.data);
     } catch (err) {
       console.error(err);
+      Swal.fire("Error", "Failed to fetch users", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,13 +52,11 @@ const ManageUsers = () => {
     }
   };
 
-  // Check if the current row belongs to the logged-in admin
-  const isCurrentUser = (userEmail) => {
-    return user?.email === userEmail;
-  };
+  // Check if row belongs to current logged-in admin
+  const isCurrentUser = (userEmail) => user?.email === userEmail;
 
   return (
-    <div className="max-w-7xl mx-auto  px-4 py-10">
+    <div className="w-full max-w-6xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-primary mb-6">Manage Users</h2>
 
       {/* Search Bar */}
@@ -78,71 +81,91 @@ const ManageUsers = () => {
 
       {/* Table */}
       <div className="overflow-x-auto bg-white border border-secondary-gray6 rounded-md">
-        <table className="table w-full text-sm text-left text-secondary-gray4">
-          <thead className="bg-secondary-gray3 text-secondary-black1 text-sm  tracking-wide">
+        <table className="table w-full text-sm text-left">
+          <thead className="bg-secondary-gray3 text-secondary-black1 text-sm tracking-wide">
             <tr>
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">Name</th>
               <th className="px-4 py-3">Email</th>
               <th className="px-4 py-3">Current Role</th>
-              <th className="px-4 py-3">Update Role</th>
+              <th className="px-4 py-3 text-center">Update Role</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-secondary-gray2">
-            {users.map((u, index) => (
-              <tr
-                key={u._id}
-                className="hover:bg-secondary-gray3/40 transition"
-              >
-                <td className="px-4 py-3 font-medium text-secondary-gray4">
-                  {index + 1}
-                </td>
-                <td className="px-4 py-3 text-secondary-black2">{u.name}</td>
-                <td className="px-4 py-3 text-secondary-gray1">{u.email}</td>
-                <td className="px-4 py-3 capitalize">{u.role}</td>
-                <td className="px-4 py-3 space-x-2">
-                  {u.role !== "student" && (
-                    <button
-                      onClick={() => updateRole(u._id, "student")}
-                      className="btn btn-info px-3 py-1 rounded-md text-xs font-medium cursor-pointer"
-                      disabled={isCurrentUser(u.email)}
-                    >
-                      Make Student
-                    </button>
-                  )}
-                  {u.role !== "tutor" && (
-                    <button
-                      onClick={() => updateRole(u._id, "tutor")}
-                      className="btn btn-secondary px-3 py-1 rounded-md text-xs font-medium cursor-pointer"
-                      disabled={isCurrentUser(u.email)}
-                    >
-                      Make Tutor
-                    </button>
-                  )}
-                  {u.role !== "admin" && (
-                    <button
-                      onClick={() => updateRole(u._id, "admin")}
-                      className="btn btn-warning px-3 py-1 rounded-md text-xs font-medium cursor-pointer"
-                      disabled={isCurrentUser(u.email)}
-                    >
-                      Make Admin
-                    </button>
-                  )}
+            {loading ? (
+              <tr>
+                <td colSpan="5" className="text-center py-8">
+                  <span className="loading loading-spinner loading-md text-primary"></span>
                 </td>
               </tr>
-            ))}
+            ) : users.length === 0 ? (
+              <tr>
+                <td
+                  colSpan="5"
+                  className="text-center py-8 text-secondary-gray5"
+                >
+                  No users found.
+                </td>
+              </tr>
+            ) : (
+              users.map((u, index) => (
+                <tr
+                  key={u._id}
+                  className="hover:bg-secondary-gray3/40 transition"
+                >
+                  <td className="px-4 py-3 font-medium text-secondary-gray4">
+                    {index + 1}
+                  </td>
+                  <td className="px-4 py-3 text-secondary-black2">{u.name}</td>
+                  <td className="px-4 py-3 text-secondary-gray1">{u.email}</td>
+                  <td className="px-4 py-3 capitalize">{u.role}</td>
+                  <td className="px-4 py-3 space-x-2 text-center">
+                    {u.role !== "student" && (
+                      <RoleButton
+                        label="Make Student"
+                        color="btn-info"
+                        onClick={() => updateRole(u._id, "student")}
+                        disabled={isCurrentUser(u.email)}
+                      />
+                    )}
+                    {u.role !== "tutor" && (
+                      <RoleButton
+                        label="Make Tutor"
+                        color="btn-secondary"
+                        onClick={() => updateRole(u._id, "tutor")}
+                        disabled={isCurrentUser(u.email)}
+                      />
+                    )}
+                    {u.role !== "admin" && (
+                      <RoleButton
+                        label="Make Admin"
+                        color="btn-warning"
+                        onClick={() => updateRole(u._id, "admin")}
+                        disabled={isCurrentUser(u.email)}
+                      />
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
-
-        {/* No User Found */}
-        {users.length === 0 && (
-          <p className="text-center text-secondary-gray5 py-6">
-            No users found.
-          </p>
-        )}
       </div>
     </div>
   );
 };
+
+const RoleButton = ({ label, color, onClick, disabled }) => (
+  <button
+    onClick={onClick}
+    className={`btn ${color} px-3 py-1 rounded-md text-xs font-medium cursor-pointer ${
+      disabled ? "opacity-50 cursor-not-allowed" : ""
+    }`}
+    disabled={disabled}
+    title={disabled ? "You cannot change your own role" : ""}
+  >
+    {label}
+  </button>
+);
 
 export default ManageUsers;
