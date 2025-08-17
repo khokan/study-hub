@@ -33,7 +33,7 @@ return (
         return (
           <div
             key={session._id}
-            className="bg-white rounded-3xl p-6 flex flex-col gap-6 border border-secondary-gray6 shadow-sm hover:shadow-md transition-shadow duration-300"
+            className="bg-secondary-black1 rounded-3xl p-6 flex flex-col gap-6 border border-secondary-gray6 shadow-sm hover:shadow-md transition-shadow duration-300"
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow =
                 "0 12px 36px rgba(0, 0, 0, 0.05)";
@@ -42,26 +42,38 @@ return (
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            {/* Session Image */}
-            <div className="relative w-full h-52 rounded-2xl overflow-hidden">
-              <img
-                src={
-                  session.registrationFee === 0
-                    ? "https://i.ibb.co/xtXLjnJ9/pic3.jpg"
-                    : "https://i.ibb.co/m5T8FCYN/pic2.jpg"
-                }
-                alt={session.sessionTitle}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
-                <span className={`text-xs px-3 py-1 rounded-full font-medium ${isOngoing ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                  {isOngoing ? "Ongoing" : "Closed"}
-                </span>
-                <span className="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">
-                  {session.registrationFee === 0 ? "Free" : `$${session.registrationFee}`}
-                </span>
-              </div>
+           {/* Session Image */}
+          <div className="relative w-full h-52 rounded-2xl overflow-hidden">
+            <img
+              src={
+                session.registrationFee === 0
+                  ? "https://i.ibb.co/xtXLjnJ9/pic3.jpg"
+                  : "https://i.ibb.co/m5T8FCYN/pic2.jpg"
+              }
+              alt={session.sessionTitle}
+              className="w-full h-full object-cover"
+            />
+
+            {/* Top Left Badge */}
+            <div className="absolute top-3 left-3">
+              <span
+                className={`text-xs px-3 py-1 rounded-full font-medium ${
+                  isOngoing
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
+              >
+                {isOngoing ? "Ongoing" : "Closed"}
+              </span>
             </div>
+
+            {/* Top Right Badge */}
+            <div className="absolute top-3 right-3">
+              <span className="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">
+                {session.registrationFee === 0 ? "Free" : `$${session.registrationFee}`}
+              </span>
+            </div>
+          </div>
 
             {/* Content */}
             <div className="flex-1">

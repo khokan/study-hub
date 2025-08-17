@@ -8,9 +8,8 @@ import { Sun, Moon, Menu, X } from "lucide-react";
 import StudyHubLogo from "./StudyHubLogo";
 import useAuth from "../../../hooks/useAuth";
 
-const Navbar = () => {
+const Navbar = ({ darkMode, setDarkMode}) => {
   const [isSticky, setIsSticky] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {

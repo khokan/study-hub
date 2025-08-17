@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: dark --default;
+}
 
-
-@theme {
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
   --font-inter: "Inter", sans-serif;
   --font-manrope: "Manrope", sans-serif;
 
@@ -25,6 +28,17 @@
   --color-secondary-gray6: #d1d5db;  /* ⚪ Light neutral gray – outlines, dividers, minimal borders */
 }
 
+/* 🌙 Dark theme overrides */
+[data-theme="dark"] {
+  --color-secondary-black1: #f5f5f5;   /* white-ish for text */
+  --color-secondary-black2: #d1d5db;   /* lighter subheading */
+  --color-secondary-gray1: #9ca3af;    /* muted gray */
+  --color-secondary-gray2: #374151;    /* dark background */
+  --color-secondary-gray3: #1f2937;    /* deeper background */
+  --color-secondary-gray4: #9ca3af;    /* icon/labels */
+  --color-secondary-gray5: #6b7280;    /* muted/disabled */
+  --color-secondary-gray6: #4b5563;    /* border/divider */
+}
 
 @layer utilities {
   @media (min-width: 1280px) {
