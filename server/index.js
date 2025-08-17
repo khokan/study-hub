@@ -1068,6 +1068,26 @@ app.get("/student-dashboard-summary", verifyTokenAndRole, verifyStudent, async (
   }
 });
 
+// GET admin profile by email (from JWT)
+app.get("/profile", verifyTokenAndRole, async (req, res) => {
+  try {
+    const email = req.user.email; // decoded from JWT
+    const user = await usersCollection.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.json({
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      joinedAt: user.created_at,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch admin profile" });
+  }
+});
 
 // Send a ping to confirm a successful connection
 // await client.db("admin").command({ ping: 1 });
