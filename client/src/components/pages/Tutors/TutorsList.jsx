@@ -35,7 +35,7 @@ const TutorsList = () => {
           {tutors.map((tutor, idx) => (
             <div
               key={idx}
-              className="border border-secondary-gray6 p-5 rounded-lg bg-white shadow hover:shadow-lg transition cursor-pointer"
+              className="border border-secondary-gray6 p-5 rounded-lg bg-secondary-gray3 shadow hover:shadow-lg transition cursor-pointer"
             >
               <div className="flex items-center gap-3 mb-4">
                 <FaChalkboardTeacher className="text-3xl text-primary" />
@@ -43,7 +43,7 @@ const TutorsList = () => {
                   <h2 className="text-lg font-semibold text-secondary-black1">
                     {tutor.name}
                   </h2>
-                  <p className="text-sm text-secondary-gray1">{tutor.email}</p>
+                  <p className="text-sm text-secondary-gray6">{tutor.email}</p>
                 </div>
               </div>
 

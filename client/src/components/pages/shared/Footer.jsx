@@ -5,9 +5,12 @@ import { FaFacebook, FaXTwitter } from "react-icons/fa6";
 import StudyHubLogo from "./StudyHubLogo";
 const Footer = () => {
   return (
-    <div className="bg-gray-100 py-10 lg:py-24 px-4">
+    <div className="bg-base-200 py-12 px-4">
       {/* Newsletter Section */}
-      <div className="container mx-auto rounded-3xl bg-gradient-to-br from-[#0057b8] to-[#003f8a] text-center p-8 lg:py-16 shadow-lg">
+    <div className="container mx-auto rounded-3xl 
+  bg-gradient-to-br from-primary to-primary/80 
+  dark:from-secondary-black2 dark:to-secondary-black1
+  text-center p-8 lg:py-16 shadow-lg">
         <h3 className="font-bold text-2xl lg:text-4xl text-white mb-3">
           Subscribe to Our Newsletter
         </h3>
@@ -34,35 +37,35 @@ const Footer = () => {
         {/* Left Column */}
         <div className="md:w-1/2">
           <StudyHubLogo />
-          <p className="mt-5 text-gray-600 md:mr-12 mb-5">
+          <p className="mt-5 text-secondary-gray6 md:mr-12 mb-5">
             StudyHub is a modern collaborative study platform where students
             join expert-led sessions, access curated materials, and grow
             together through peer learning.
           </p>
-          <ul className="flex gap-3 text-gray-500">
+          <ul className="flex gap-3 text-secondary-gray5">
             <li>
               <Link
-                to="https://www.facebook.com/xoss.arif"
+                to="https://www.facebook.com/yourprofile"
                 target="_blank"
-                className="hover:text-[#0057b8]"
+                className="hover:text-primary"
               >
                 <FaFacebook size={18} />
               </Link>
             </li>
             <li>
               <Link
-                to="https://x.com/xoss_arif"
+                to="https://x.com/yourprofile"
                 target="_blank"
-                className="hover:text-[#0057b8]"
+                className="hover:text-primary"
               >
                 <FaXTwitter size={18} />
               </Link>
             </li>
             <li>
               <Link
-                to="https://www.linkedin.com/in/arif128551/"
+                to="https://www.linkedin.com/in/yourprofile/"
                 target="_blank"
-                className="hover:text-[#0057b8]"
+                className="hover:text-primary"
               >
                 <FaLinkedinIn size={18} />
               </Link>
@@ -73,50 +76,50 @@ const Footer = () => {
         {/* Right Column */}
         <div className="md:w-1/2 flex flex-col sm:flex-row gap-10 md:gap-0">
           <div className="flex-1">
-            <h3 className="text-gray-800 font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-3 text-gray-600">
+            <h3 className="text-secondary-gray6 font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-3 text-secondary-gray5">
               <li>
-                <Link to="/" className="hover:text-[#0057b8]">
+                <Link to="/" className="hover:text-primary">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/sessions" className="hover:text-[#0057b8]">
+                <Link to="/sessions" className="hover:text-primary">
                   All Sessions
                 </Link>
               </li>
               <li>
-                <Link to="/tutors" className="hover:text-[#0057b8]">
+                <Link to="/tutors" className="hover:text-primary">
                   Tutors
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-[#0057b8]">
+                <Link to="/about" className="hover:text-primary">
                   About StudyHub
                 </Link>
               </li>
             </ul>
           </div>
           <div className="flex-1">
-            <h3 className="text-gray-800 font-semibold mb-4">Support & Info</h3>
-            <ul className="space-y-3 text-gray-600">
+            <h3 className="text-secondary-gray6 font-semibold mb-4">Support & Info</h3>
+            <ul className="space-y-3 text-secondary-gray5">
               <li>
-                <Link to="/help-center" className="hover:text-[#0057b8]">
+                <Link to="/help-center" className="hover:text-primary">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="hover:text-[#0057b8]">
+                <Link to="/faq" className="hover:text-primary">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#0057b8]">
+                <Link to="/contact" className="hover:text-primary">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link to="/terms-conditions" className="hover:text-[#0057b8]">
+                <Link to="/terms-conditions" className="hover:text-primary">
                   Terms & Conditions
                 </Link>
               </li>

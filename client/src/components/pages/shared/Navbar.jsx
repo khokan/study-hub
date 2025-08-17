@@ -86,7 +86,7 @@ const Navbar = ({ darkMode, setDarkMode}) => {
           <button
             aria-label="Toggle dark mode"
             onClick={() => setDarkMode(!darkMode)}
-            className="btn btn-circle btn-ghost"
+            className="btn btn-circle btn-secondary-black1 hover:bg-secondary-black1/80 transition"
           >
             {darkMode ? <Sun /> : <Moon />}
           </button>
@@ -121,14 +121,8 @@ const Navbar = ({ darkMode, setDarkMode}) => {
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-ghost rounded-full px-6">
+              <Link to="/login" className="btn btn-primary rounded-full px-6">
                 Login
-              </Link>
-              <Link
-                to="/register"
-                className="btn btn-primary rounded-full px-6"
-              >
-                Register
               </Link>
             </>
           )}
@@ -136,26 +130,64 @@ const Navbar = ({ darkMode, setDarkMode}) => {
       </div>
 
       {/* 🔹 Mobile Drawer Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-y-0 left-0 w-64 bg-base-100 shadow-md z-50 p-6 flex flex-col"
-          >
+     <AnimatePresence>
+  {mobileOpen && (
+    <motion.div
+      initial={{ x: "-100%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "-100%" }}
+      transition={{ duration: 0.3 }}
+      data-theme={darkMode ? "dark" : "light"}
+      className="fixed inset-y-0 left-0 w-64 bg-base-100 dark:bg-secondary-black1 shadow-md z-50 p-6 flex flex-col"
+    >
+      {/* Close Button */}
+      <button
+        aria-label="Close mobile menu"
+        className="self-end mb-4 btn btn-ghost"
+        onClick={() => setMobileOpen(false)}
+      >
+        <X />
+      </button>
+
+      {/* Navigation Items */}
+      <nav className="flex flex-col gap-4 mb-6">{navItems}</nav>
+
+      {/* Dark Mode Toggle */}
+      <button
+        aria-label="Toggle dark mode"
+        onClick={() => setDarkMode(!darkMode)}
+        className="btn btn-circle btn-ghost mb-4"
+      >
+        {darkMode ? <Sun /> : <Moon />}
+      </button>
+
+      {/* Auth Buttons */}
+      <div className="flex flex-col gap-3">
+        {user ? (
+          <>
             <button
-              aria-label="Close mobile menu"
-              className="self-end mb-4 btn btn-ghost"
+              onClick={handleLogout}
+              className="btn btn-primary w-full"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="btn btn-primary w-full rounded-full"
               onClick={() => setMobileOpen(false)}
             >
-              <X />
-            </button>
-            <nav className="flex flex-col gap-4">{navItems}</nav>
-          </motion.div>
+              Login
+            </Link>
+          </>
         )}
-      </AnimatePresence>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </div>
   );
 };

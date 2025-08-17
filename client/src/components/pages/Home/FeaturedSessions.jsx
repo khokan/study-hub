@@ -33,14 +33,9 @@ return (
         return (
           <div
             key={session._id}
-            className="bg-secondary-black1 rounded-3xl p-6 flex flex-col gap-6 border border-secondary-gray6 shadow-sm hover:shadow-md transition-shadow duration-300"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow =
-                "0 12px 36px rgba(0, 0, 0, 0.05)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "none";
-            }}
+    className="bg-secondary-black1 rounded-2xl p-5 flex flex-col sm:flex-row lg:flex-col gap-4 
+  shadow shadow-neutral-300 hover:shadow-neutral-400 
+  dark:shadow-neutral-800 dark:hover:shadow-neutral-700 transition"
           >
            {/* Session Image */}
           <div className="relative w-full h-52 rounded-2xl overflow-hidden">

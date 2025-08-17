@@ -89,7 +89,7 @@ const TestimonialCarousel = () => {
   };
 
   return (
-    <section className="bg-base-100 pt-12 pb-8 lg:py-20 px-4 relative">
+    <section className="bg-base-100 pt-12 pb-8  px-4 relative">
       <h2 className="text-center font-semibold text-primary mb-2">Student Feedback</h2>
       <p className="text-center text-base-content font-semibold text-xl lg:text-[36px] mb-6">
         What Learners Say About Us
@@ -97,11 +97,14 @@ const TestimonialCarousel = () => {
       <div className="max-w-6xl mx-auto px-4 relative">
         <Slider {...settings}>
           {testimonials.map((item, i) => (
-            <div key={i} className="p-4 min-h-[340px]">
-              <div className="h-full w-full bg-white rounded-xl p-6 border border-base-300 flex flex-col justify-between text-center md:text-left shadow-sm hover:shadow-md transition">
+            <div key={i} className="p-4 min-h-[280px]">
+              <div className="h-full w-full bg-secondary-gray3 rounded-xl p-6 border border-base-300 flex flex-col justify-between text-center md:text-left shadow-sm hover:shadow-md transition"
+               style={{
+              transition: "box-shadow 0.3s ease",
+            }}>
                 <div>
                   <h3 className="font-semibold text-lg text-primary mb-3">{item.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">"{item.message}"</p>
+                  <p className="text-secondary-gray5 text-sm mb-4">"{item.message}"</p>
                 </div>
                 <div className="flex items-center flex-col md:flex-row gap-3 mt-4">
                   <img
@@ -110,7 +113,7 @@ const TestimonialCarousel = () => {
                     className="w-10 h-10 rounded-full object-cover border border-primary"
                   />
                   <div>
-                    <p className="font-semibold text-gray-800 mb-1">{item.name}</p>
+                    <p className="font-semibold text-secondary-gray6 mb-1">{item.name}</p>
                     <div className="flex text-yellow-400 gap-1 text-xs">
                       {Array.from({ length: 5 }).map((_, idx) => (
                         <FaStar key={idx} />
