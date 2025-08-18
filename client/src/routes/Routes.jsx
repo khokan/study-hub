@@ -28,6 +28,9 @@ import ManageNotes from "../components/pages/Student/ManageNotes";
 import ViewMaterials from "../components/pages/Student/ViewMaterials";
 import TutorsList from "../components/pages/Tutors/TutorsList";
 import FAQSection from "../components/pages/shared/Faq";
+import AboutPage from "../components/pages/shared/About";
+import Team from "../components/pages/Home/Team";
+import ContactPage from "../components/pages/shared/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +65,18 @@ export const router = createBrowserRouter([
       {
         path: "/faq",
         Component: FAQSection,
+      },
+       {
+        path: "/about",
+        Component: AboutPage,
+      },
+       {
+        path: "/teams",
+        Component: Team,
+      },
+      {
+        path: "/contactUs",
+        Component: ContactPage,
       },
     ],
   },

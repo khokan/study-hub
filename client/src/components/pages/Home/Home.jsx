@@ -7,6 +7,7 @@ import FeaturedTopics from "./FeaturedTopics";
 import TestimonialCarousel from "./TestimonialCarousel";
 import PlatformStats from "./PlatformStats";
 import UpcomingWebinars from "./UpcomingWebinars";
+import Team from "./Team";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       {/* <PlatformStats /> */}
      <TestimonialCarousel/>
      <UpcomingWebinars />
+     <Team/>
     </div>
   );
 };

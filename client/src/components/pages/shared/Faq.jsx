@@ -41,7 +41,7 @@ const FAQSection = () => {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-secondary-black1 rounded-2xl shadow hover:shadow-md transition"
+            className="bg-secondary-black2 dark:bg-secondary-black1 rounded-2xl shadow hover:shadow-md transition"
           >
             <button
               className="w-full flex justify-between items-center p-5 text-left text-lg font-medium text-secondary-black1 dark:text-white"

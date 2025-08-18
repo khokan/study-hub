@@ -97,11 +97,6 @@ const Footer = () => {
                   Tutors
                 </Link>
               </li>
-              <li>
-                <Link to="/about" className="hover:text-primary">
-                  About StudyHub
-                </Link>
-              </li>
             </ul>
           </div>
           <div className="flex-1">
@@ -110,7 +105,7 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3 text-secondary-gray5">
               <li>
-                <Link to="/About" className="hover:text-primary">
+                <Link to="/about" className="hover:text-primary">
                   About
                 </Link>
               </li>
@@ -120,13 +115,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-primary">
+                <Link to="/contactUs" className="hover:text-primary">
                   Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/teams" className="hover:text-primary">
-                  Teams
                 </Link>
               </li>
             </ul>
